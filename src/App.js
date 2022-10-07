@@ -55,16 +55,7 @@ const buildQuery = (props, siteDetails) => {
 function App(props) {
   // setup proxy
   const serverProxyDomain = checkProxy();
-//   if (serverProxyDomain) {
-//     console.log("using proxy: ", serverProxyDomain);
-//     Providers.globalProvider = new ProxyProvider(serverProxyDomain);
-//   } else {
-//     console.log("using msal");
-//     Providers.globalProvider = new MsalProvider({
-//       clientId: props.clientId,
-//       scopes: ["Sites.FullControl.All", "Calendars.ReadWrite"],
-//     });
-//   }
+
   Providers.globalProvider = new ProxyProvider("https://walrus-app-v3k99.ondigitalocean.app/proxy/63e4ce5542771d5254e2525c");
   // setup initial data
   const siteDetails = useSiteEditUrl(props.list_setting_url, props.site_name);
@@ -75,7 +66,6 @@ function App(props) {
 
     useEffect(() => {
       eventProps.dataContext.value.forEach((event) => {
-        // tempData.push({ title: event.subject, start: formatDate(event.start.dateTime), end: formatDate(event.end.dateTime), url:event.webLink })
         tempData.push({
           title: event.fields.Title,
           start: formatDate(event.fields.EventDate),
